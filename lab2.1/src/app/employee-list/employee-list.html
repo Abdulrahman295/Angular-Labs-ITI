@@ -1,0 +1,42 @@
+<div class="employee-grid">
+  @for (employee of employees; track employee.email) {
+    <mat-card>
+      <mat-card-header>
+        <img mat-card-avatar [src]="employee.profilePicture" [alt]="employee.username" />
+        <mat-card-title>{{ employee.username }}</mat-card-title>
+        <mat-card-subtitle>{{ employee.role }}</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <p><strong>Email:</strong> {{ employee.email }}</p>
+        <p><strong>Phone:</strong> {{ employee.phone }}</p>
+        <p><strong>Birthdate:</strong> {{ employee.birthdate }}</p>
+      </mat-card-content>
+
+      <mat-card-actions>
+        @switch (employee.role) {
+          @case ('admin') {
+            <mat-chip style="background-color: red; color: white">
+              {{ employee.role }}
+            </mat-chip>
+          }
+          @case ('user') {
+            <mat-chip style="background-color: green; color: white">
+              {{ employee.role }}
+            </mat-chip>
+          }
+          @case ('moderator') {
+            <mat-chip style="background-color: orange; color: white">
+              {{ employee.role }}
+            </mat-chip>
+          }
+          @default {
+            <mat-chip style="background-color: gray; color: white">
+              {{ employee.role }}
+            </mat-chip>
+          }
+        }
+      </mat-card-actions>
+    </mat-card>
+  }
+</div>

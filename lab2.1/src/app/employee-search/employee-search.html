@@ -1,0 +1,10 @@
+<mat-form-field appearance="outline" subscriptSizing="dynamic">
+  <mat-label>Search employees</mat-label>
+  <input
+    matInput
+    [(ngModel)]="searchTerm"
+    (input)="onSearchChange()"
+    placeholder="Search by name or email..."
+  />
+  <mat-icon matSuffix>search</mat-icon>
+</mat-form-field>

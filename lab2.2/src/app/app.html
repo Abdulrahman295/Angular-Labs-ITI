@@ -1,0 +1,9 @@
+<div class="todo-container">
+  <h1>Todo App</h1>
+  <app-todo-input (addTodo)="onAddTodo($event)"></app-todo-input>
+  <app-todo-list
+    [todos]="todos"
+    (deleteTodo)="onDeleteTodo($event)"
+    (toggleTodo)="onToggleTodo($event)"
+  ></app-todo-list>
+</div>

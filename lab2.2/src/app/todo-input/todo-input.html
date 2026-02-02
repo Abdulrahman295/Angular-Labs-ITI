@@ -1,0 +1,8 @@
+<div class="todo-input-container">
+  <mat-form-field appearance="outline">
+    <mat-label>New Todo</mat-label>
+    <input matInput [(ngModel)]="todoText" placeholder="Enter a todo..." />
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" (click)="onAdd()">Add</button>
+</div>

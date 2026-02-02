@@ -1,0 +1,14 @@
+mat-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+mat-checkbox {
+  flex-grow: 1;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: gray;
+}

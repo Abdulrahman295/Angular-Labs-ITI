@@ -1,0 +1,5 @@
+<div class="employee-container">
+  <h1>Employee Directory</h1>
+  <app-employee-search (search)="onSearch($event)"></app-employee-search>
+  <app-employee-list [employees]="filteredEmployees"></app-employee-list>
+</div>

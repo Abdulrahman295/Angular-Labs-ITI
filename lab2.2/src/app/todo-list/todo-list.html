@@ -1,0 +1,13 @@
+<mat-list>
+  @for (todo of todos; track $index; let i = $index) {
+    <mat-list-item>
+      <mat-checkbox [checked]="todo.completed" (change)="onToggle(i)">
+        <span [class.completed]="todo.completed">{{ todo.text }}</span>
+      </mat-checkbox>
+
+      <button mat-icon-button color="warn" (click)="onDelete(i)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-list-item>
+  }
+</mat-list>
