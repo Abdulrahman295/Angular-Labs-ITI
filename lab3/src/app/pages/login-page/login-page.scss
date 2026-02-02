@@ -1,0 +1,30 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  padding: 48px 24px;
+}
+
+mat-card {
+  width: 100%;
+  max-width: 400px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+button {
+  align-self: flex-start;
+}
+
+.error-message {
+  color: red;
+  margin-bottom: 16px;
+}

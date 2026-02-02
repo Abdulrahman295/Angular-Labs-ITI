@@ -1,0 +1,28 @@
+.product-details {
+  display: flex;
+  gap: 32px;
+  padding: 24px;
+  img {
+    max-width: 300px;
+    object-fit: contain;
+  }
+  .info {
+    h1 {
+      margin-bottom: 16px;
+    }
+    .category,
+    .brand {
+      color: gray;
+      margin-bottom: 8px;
+    }
+    .description {
+      margin-top: 16px;
+      line-height: 1.6;
+    }
+  }
+}
+
+.not-found {
+  padding: 24px;
+  text-align: center;
+}

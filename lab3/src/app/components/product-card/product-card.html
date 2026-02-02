@@ -1,0 +1,17 @@
+<a [routerLink]="['/product', product.id]" class="card-link">
+  <mat-card>
+    <img mat-card-image [src]="product.image" [alt]="product.title" />
+    <mat-card-header>
+      <mat-card-title>{{ product.title }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p class="price">{{ product.price | currency: 'EGP' }}</p>
+      <p class="stock" [class.out-of-stock]="isOutOfStock" [class.in-stock]="!isOutOfStock">
+        {{ stockStatus }}
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="addToCart($event)">Add to Cart</button>
+    </mat-card-actions>
+  </mat-card>
+</a>

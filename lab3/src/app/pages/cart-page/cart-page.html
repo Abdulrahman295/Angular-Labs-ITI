@@ -1,0 +1,22 @@
+<div class="cart-container">
+  <h1>Shopping Cart</h1>
+  @if (isEmpty) {
+    <p class="empty-message">Your cart is empty.</p>
+  } @else {
+    <mat-list>
+      @for (item of cartItems; track item.id) {
+        <mat-list-item>
+          <img matListItemAvatar [src]="item.image" [alt]="item.title" />
+          <span matListItemTitle>{{ item.title }}</span>
+          <span matListItemLine>{{ item.price | currency: 'EGP' }}</span>
+          <button mat-icon-button color="warn" (click)="removeFromCart(item.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-list-item>
+      }
+    </mat-list>
+    <div class="cart-actions">
+      <button mat-raised-button color="warn" (click)="clearCart()">Clear Cart</button>
+    </div>
+  }
+</div>
