@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { Signal } from '@angular/core';
 import { Product } from '../../models/product.interface';
 import { ProductsService } from '../../services/products.service';
 
@@ -9,18 +11,14 @@ import { ProductsService } from '../../services/products.service';
   templateUrl: './product-details-page.html',
   styleUrl: './product-details-page.scss',
 })
-export class ProductDetailsPage implements OnInit {
-  product: Product | undefined;
+export class ProductDetailsPage {
+  product: Signal<Product | undefined>;
 
   constructor(
     private route: ActivatedRoute,
     private productsService: ProductsService,
-  ) {}
-
-  ngOnInit(): void {
+  ) {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    if (id) {
-      this.product = this.productsService.getProductById(id);
-    }
+    this.product = toSignal(this.productsService.getProductById(id));
   }
 }

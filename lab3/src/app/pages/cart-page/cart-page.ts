@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { Product } from '../../models/product.interface';
-import { CartService } from '../../services/cart.service';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CurrencyPipe } from '@angular/common';
+import { CartItem } from '../../models/cart-item.interface';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-cart-page',
@@ -15,7 +15,7 @@ import { CurrencyPipe } from '@angular/common';
 export class CartPage {
   constructor(private cartService: CartService) {}
 
-  get cartItems(): Product[] {
+  get cartItems(): CartItem[] {
     return this.cartService.getCartItems();
   }
 
@@ -23,11 +23,19 @@ export class CartPage {
     return this.cartItems.length === 0;
   }
 
-  removeFromCart(productId: number): void {
-    this.cartService.removeFromCart(productId);
+  get totalCount(): number {
+    return this.cartService.getTotalCount();
   }
 
-  clearCart(): void {
-    this.cartService.clearCart();
+  increment(productId: number): void {
+    this.cartService.incrementQuantity(productId);
+  }
+
+  decrement(productId: number): void {
+    this.cartService.decrementQuantity(productId);
+  }
+
+  remove(productId: number): void {
+    this.cartService.removeFromCart(productId);
   }
 }

@@ -1,15 +1,13 @@
-@if (product) {
+@if (product()) {
   <div class="product-details">
-    <img [src]="product.image" [alt]="product.title" />
+    <img [src]="product()!.thumbnail" [alt]="product()!.title" />
     <div class="info">
-      <h1>{{ product.title }}</h1>
-      <p class="category">Category: {{ product.category }}</p>
-      <p class="brand">Brand: {{ product.brand }}</p>
-      <p class="description">{{ product.description }}</p>
+      <h1>{{ product()!.title }}</h1>
+      <p class="category">Category: {{ product()!.category }}</p>
+      <p class="brand">Brand: {{ product()!.brand }}</p>
+      <p class="description">{{ product()!.description }}</p>
     </div>
   </div>
 } @else {
-  <div class="not-found">
-    <h1>Product not found</h1>
-  </div>
+  <p>Loading...</p>
 }

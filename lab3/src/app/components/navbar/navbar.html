@@ -4,6 +4,15 @@
     <a mat-button routerLink="/products" routerLinkActive="active-link">Products</a>
     <a mat-button routerLink="/login" routerLinkActive="active-link">Login</a>
     <a mat-button routerLink="/register" routerLinkActive="active-link">Register</a>
-    <a mat-button routerLink="/cart" routerLinkActive="active-link">Cart</a>
+    <a
+      mat-button
+      routerLink="/cart"
+      routerLinkActive="active-link"
+      [matBadge]="cartCount"
+      [matBadgeHidden]="cartCount === 0"
+      matBadgeColor="warn"
+    >
+      Cart
+    </a>
   </nav>
 </mat-toolbar>
