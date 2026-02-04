@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+  AbstractControl,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -22,31 +28,36 @@ import { AuthService } from '../../services/auth.service';
 export class RegisterPage {
   registerForm: FormGroup;
   errorMessage = '';
+  noSpacesPattern = /^\S*$/;
+  passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[*@%$#]).{8,}$/;
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
   ) {
-    this.registerForm = this.fb.group({
-      username: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
-      confirmPassword: ['', Validators.required],
-    });
+    this.registerForm = this.fb.group(
+      {
+        name: ['', Validators.required],
+        username: ['', [Validators.required, Validators.pattern(this.noSpacesPattern)]],
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required, Validators.pattern(this.passwordPattern)]],
+        confirmPassword: ['', Validators.required],
+      },
+      { validators: this.passwordMatchValidator },
+    );
+  }
+
+  private passwordMatchValidator(control: AbstractControl): { [key: string]: boolean } | null {
+    const password = control.get('password')?.value;
+    const confirmPassword = control.get('confirmPassword')?.value;
+    return password === confirmPassword ? null : { passwordMismatch: true };
   }
 
   onSubmit(): void {
     if (this.registerForm.valid) {
-      const { username, email, password, confirmPassword } = this.registerForm.value;
-
-      if (password !== confirmPassword) {
-        this.errorMessage = 'Passwords do not match';
-        return;
-      }
-
-      const success = this.authService.register(username, email, password);
-
+      const { name, username, email, password } = this.registerForm.value;
+      const success = this.authService.register(name, username, email, password);
       if (success) {
         this.errorMessage = '';
         this.router.navigate(['/products']);

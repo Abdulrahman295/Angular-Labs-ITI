@@ -4,17 +4,38 @@
       <mat-card-title>Login</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
         @if (errorMessage) {
           <p class="error-message">{{ errorMessage }}</p>
         }
         <mat-form-field appearance="outline">
-          <mat-label>Username</mat-label>
-          <input matInput formControlName="username" />
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            type="email"
+            name="email"
+            [(ngModel)]="email"
+            required
+            pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+            #emailInput="ngModel"
+          />
+          @if (emailInput.touched && emailInput.invalid) {
+            <mat-error>Valid email is required</mat-error>
+          }
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Password</mat-label>
-          <input matInput type="password" formControlName="password" />
+          <input
+            matInput
+            type="password"
+            name="password"
+            [(ngModel)]="password"
+            required
+            #passwordInput="ngModel"
+          />
+          @if (passwordInput.touched && passwordInput.invalid) {
+            <mat-error>Password is required</mat-error>
+          }
         </mat-form-field>
         <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">
           Login

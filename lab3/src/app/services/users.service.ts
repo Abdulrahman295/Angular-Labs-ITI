@@ -16,15 +16,15 @@ export class UsersService {
     return this.users.find((user) => user.email === email);
   }
 
-  validateCredentials(username: string, password: string): User | null {
-    const user = this.findByUsername(username);
+  validateCredentials(email: string, password: string): User | null {
+    const user = this.findByEmail(email);
     if (user && user.password === password) {
       return user;
     }
     return null;
   }
 
-  register(username: string, email: string, password: string): User | null {
+  addUser(name: string, username: string, email: string, password: string): User | null {
     if (this.findByUsername(username)) {
       return null; // Username taken
     }
@@ -35,6 +35,7 @@ export class UsersService {
     // Create new user
     const newUser: User = {
       id: this.users.length + 1,
+      name,
       username,
       email,
       password,

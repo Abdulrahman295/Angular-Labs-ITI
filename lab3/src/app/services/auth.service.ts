@@ -10,8 +10,8 @@ export class AuthService {
 
   constructor(private usersService: UsersService) {}
 
-  login(username: string, password: string): boolean {
-    const user = this.usersService.validateCredentials(username, password);
+  login(email: string, password: string): boolean {
+    const user = this.usersService.validateCredentials(email, password);
     if (user) {
       this.currentUser = user;
       return true;
@@ -19,8 +19,8 @@ export class AuthService {
     return false;
   }
 
-  register(username: string, email: string, password: string): boolean {
-    const newUser = this.usersService.register(username, email, password);
+  register(name: string, username: string, email: string, password: string): boolean {
+    const newUser = this.usersService.addUser(name, username, email, password);
     if (newUser) {
       this.currentUser = newUser; // Auto-login after registration
       return true;
